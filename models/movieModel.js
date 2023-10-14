@@ -9,4 +9,4 @@ const Movies = new mongoose.Schema({
         max: 5,
         required: true
       }
-})
+}) 
