@@ -1,8 +1,7 @@
 
 const express = require("express")
 const app = express()
-
-const port = 8000
+const { DATABASE_URL, PORT } = require("./config");
 
 
 
@@ -15,7 +14,7 @@ app.get('/', (req, res) => {
     res.render('homepage.ejs')
 })
 
-app.listen(port, (req, res) =>{
-    console.log(`Server is running on port ${port} ✅`)
+app.listen(PORT, (req, res) =>{
+    console.log(`Server is running on port ${PORT} ✅`)
 })
 
