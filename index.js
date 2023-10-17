@@ -1,4 +1,4 @@
-
+const mongoose = require("mongoose")
 const express = require("express")
 const app = express()
 const { DATABASE_URL, PORT } = require("./config");
