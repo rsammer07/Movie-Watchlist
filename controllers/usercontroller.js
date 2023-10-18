@@ -15,7 +15,7 @@ router.post("/register", async (req, res) => {
       if(userExist) {
         res.status(400).send("User already exist!")
       }
-
+// add password 
 
 
       // create a new user
