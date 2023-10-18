@@ -1,8 +1,7 @@
-const mongoose = require("mongoose")
+const mongoose = require("./connection")
 const express = require("express")
 const app = express()
-const { DATABASE_URL, PORT } = require("./config");
-
+const { Movie } = require("./models/movieModel")
 
 
 app.use(express.static(__dirname + '/views'));
@@ -14,7 +13,10 @@ app.get('/', (req, res) => {
     res.render('homepage.ejs')
 })
 
-app.listen(PORT, (req, res) =>{
-    console.log(`Server is running on port ${PORT} ✅`)
-})
+const movieRouter = require("./controllers/moviecontroller")
+app.use("/movies", movieRouter)
 
+
+app.listen(`8000`, () => {
+    console.log(`Listening!`)
+})
