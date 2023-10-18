@@ -1,6 +1,6 @@
 const mongoose = require(`mongoose`)
 
-const Movies = new mongoose.Schema({
+const MovieSchema = new mongoose.Schema({
     title: {type: String, required: true, unique: true},
     img: {type: String, required: true},
     watched: {type: Boolean, default: false},
@@ -12,3 +12,7 @@ const Movies = new mongoose.Schema({
         default: 0
       }
 }) 
+
+const Movie = mongoose.model("Movie", MovieSchema)
+
+module.exports = Movie
