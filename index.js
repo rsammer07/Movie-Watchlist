@@ -1,8 +1,7 @@
-const mongoose = require("mongoose")
+const mongoose = require("./connection")
 const express = require("express")
 const app = express()
-const { DATABASE_URL, PORT } = require("./config");
-
+const { Movie } = require("./models/movieModel")
 
 
 app.use(express.static(__dirname + '/views'));
@@ -13,8 +12,26 @@ app.set("view engine", "ejs")
 app.get('/', (req, res) => {
     res.render('homepage.ejs')
 })
-
-app.listen(PORT, (req, res) =>{
-    console.log(`Server is running on port ${PORT} ✅`)
+app.get('/login', (req, res) => {
+    res.render('login.ejs')
+})
+app.get('/profile', (req, res) => {
+    res.render('profile.ejs')
+})
+app.get('/createaccount', (req, res) => {
+    res.render('createaccount.ejs')
+})
+app.get('/review', (req, res) => {
+    res.render('review.ejs')
+})
+app.get('/error', (req, res) => {
+    res.render('error.ejs')
 })
 
+const movieRouter = require("./controllers/moviecontroller")
+app.use("/movies", movieRouter)
+
+
+app.listen(`8000`, () => {
+    console.log(`Listening!`)
+})

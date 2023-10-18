@@ -1,4 +1,57 @@
-h1 {
-    font-size: 50px;
+#profile-link{
+    display: none;
+    font-size: 20px;
+    text-align: right;
+    margin-right: 90px;
+    margin-top: 90px;
+}
+#signin-link{
+    display: block;
+    font-size: 20px;
+    text-align: right;
+    margin-top: 90px;
+    margin-right: 90px;
+}
+#allmovies{
     text-align: center;
+}
+#searchbar {
+    margin-left: 90px;
+}
+#registerdivbox {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+#registerlinkbutton {
+margin-top: 50px;
+font-size: 50px;
+}
+#registerlink {
+    text-decoration: none;
+    color: black;
+}
+#login {
+    text-align: center;
+    font-size: 80px;
+}
+#formbox {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 50px;
+
+}
+.loginlabel {
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   font-size:50px;
+}
+.loginsubmit {
+    margin-left: 180px;
+}
+#logo {
+    width: 80px;
+    height: 80px;
 }
