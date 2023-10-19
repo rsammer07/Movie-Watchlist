@@ -2,11 +2,11 @@ const express = require("express")
 const router = express.Router()
 
 
-const Movies = require("../models/movieModel")
+const Movie = require("../models/movieModel")
 //get all movies
 router.get("/", async (req, res, next) => {
     try {
-        const movies = await Movies.find()
+        const movies = await Movie.find()
         res.render("/movies", { movies })
     } catch (error) {
         next(error)
@@ -16,7 +16,7 @@ router.get("/", async (req, res, next) => {
 router.get("/:title", async (req, res, next) => {
     try {
         const title = req.params.title;
-        const movie = await Movies.find({ title: title });
+        const movie = await Movie.find({ title: title });
 
         if (movie.length > 0) {
             res.render("movie", { movie: movie[0] });
@@ -29,7 +29,7 @@ router.get("/:title", async (req, res, next) => {
 });
 
 //send new movie form
-router.get("/new", async(req, res, next) => {
+router.get("/newMovie", async(req, res, next) => {
     try {
         res.render("/newmovie")
     } catch (error) {
@@ -49,7 +49,7 @@ router.get("/update", async(req, res, next) => {
 //post new movies
 router.post("/", async(req, res, next) => {
     try {
-        const createdMovie = await Movies.create({
+        const createdMovie = await Movie.create({
             title: req.body.title,
             img: req.body.image,
             watched: req.body.watched,
@@ -73,18 +73,17 @@ router.put("/", async(req, res, next) => {
             watched: req.body.watched,
             rating: req.body.rating
         }
-        const updatedMovie = await Movies.findOneAndUpdate(filter, data, { new: true })
-        res.redirect("/")
+        const updatedMovie = await Movie.findOneAndUpdate(filter, data, { new: true })
+        res.redirect("/:id", {updatedMovie})
     } catch (error) {
         next(error)
     }
 })
 
-//delete movies by title
-
-router.delete("/:title", async(req, res, next) => {
+//delete movies
+router.delete("/", async(req, res, next) => {
     try {
-        await Movies.FindOneAndDelete({ title: title })
+        await Movie.FindOneAndDelete({ title: title })
         res.redirect("/movies")
     } catch (error) {
         next(error)
