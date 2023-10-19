@@ -7,3 +7,4 @@ const User = new mongoose.Schema({
     unwatchedMovies: [],
     watchedMovies: []
 })
+module.exports = { User }

@@ -4,38 +4,75 @@ const express = require("express");
 
 // Import User Model
 const User = require("../models/userModel");
+// get
+router.get("/:userName", async (req, res, next) => {
+  try {
+    // find user by username
+    const userName = req.params.userName;
+    const user = await User.findOne({userName: userName})
 
+    // if the user does not exist 
+    if(!user) {
+      res.status(404).send("No user found")
+    }
+// return user dat
+    res.redirect("/:userName", userName);
+  } catch (error) {
+    next(error)
+  }
+})
 
 // Register user 
 
-router.post("/register", async (req, res) => {
+router.post("/register", async (req, res, next) => {
     try {
       // Check if the user exists
       const userExist = await User.findOne({email: req.body.email});
       if(userExist) {
         res.status(400).send("User already exist!")
       }
-// add password 
+
 
 
       // create a new user
-      const newLogin = new User({
+      const newUser = await User.create({
         userName: req.params.userName,
         email: req.params.email,
-        password: req.params.password
+        password: req.params.password,
+        unwatchedMovies: req.params.unwatchedMovies,
+        watchedMovies: req.params.watchedMovies
       });
 
       // Save the user to the database
-      const saveUserInfo = await newLogin.save()
+      
 
       // success response
-      res.status(201).json({message: 'successful registration', user: saveUserInfo})
+      res.redirect("/userSuccess", {newUser})
 
     } catch(error) {
-      res.status(500).json({ message: 'Server error', error: error.message });
+      next(error);
     }
+});
+
+// Update user
+router.put("/", async (req, res, next) => {
+  try {
+    const filter = {
+      _userName: req.params.userName
+    }
+    const data = {
+      userName: req.params.userName,
+      email: req.params.email,
+      password: req.params.password,
+      unwatchedMovies: req.params.unwatchedMovies,
+      watchedMovies: req.params.watchedMovies
+    }
+    const updatedUser = await User.findOneAndUpdate(filter, data, {new: true})
+    res.redirect("/passwordUpdate", {updatedUser})
+  } catch (error) {
+    next(error)
+  }
 })
-//
 
 
 
