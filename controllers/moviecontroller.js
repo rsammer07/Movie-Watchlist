@@ -7,7 +7,7 @@ const Movie = require("../models/movieModel")
 router.get("/", async (req, res, next) => {
     try {
         const movies = await Movie.find()
-        // res.render("/movies", { movies })
+        // res.render("/allMovies", { movies })
         res.json(movies)
     } catch (error) {
         next(error)
