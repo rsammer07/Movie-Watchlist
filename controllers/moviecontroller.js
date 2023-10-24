@@ -1,9 +1,12 @@
 const express = require("express")
 const router = express.Router()
-
+const { displayAllMovies } = require("../controllers/indexcontroller")
 
 const Movie = require("../models/movieModel")
 //get all movies
+
+// router.get("/", displayAllMovies)
+
 router.get("/", async (req, res, next) => {
     try {
         const movies = await Movie.find()
