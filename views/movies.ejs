@@ -1,3 +1,7 @@
+<form id="search-form" action="/movies">
+    <input id="searchbar" type="text" name="title" placeholder="Search...">
+    <button type="submit">Search</button>
+</form>
 <h1 class="allMoviesList"> List of all movies </h1>
 <div class="movies-grid">
     <% movies.forEach(movie => { %>
@@ -17,4 +21,3 @@
 <button id="newMovie"><a id="newmovieLink" href="/movies/newMovie">ADD</a></button>
 </body>
 </html>
-
