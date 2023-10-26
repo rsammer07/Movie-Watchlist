@@ -1,6 +1,6 @@
 <h2 id="login">Login</h2>
-<div id="formbox">
-    <form action="/profile" method="GET">
+<!-- <div id="formbox">
+    <form action="/profile" method="post">
         <label class="loginlabel" for="username">Username:</label>
         <br>
         <input class="loginlabel" type="text" name="userName" required>
@@ -14,6 +14,17 @@
 </div>
 <div id="registerdivbox">
     <button id="registerlinkbutton"><a id="registerlink" href="/createaccount">No Account? <br> Create One Here!</a></button>
-</div>
+</div> -->
+<ul class="right">
+    <li>
+      <% if (user) { %>
+        <a href="/logout">Log Out</a>
+        <span>Hi <%= user.name %> </span>
+      <% } else { %>
+        <a href="/auth/google"> Login with Google</a>
+
+      <% } %>  
+    </li>
+  </ul>
 </body>
 </html>
