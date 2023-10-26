@@ -57,7 +57,7 @@ router.get("/update", async(req, res, next) => {
 })
 
 //post new movies
-router.post("/", async(req, res, next) => {
+router.post("/", isLoggedIn, async(req, res, next) => {
     try {
         const createdMovie = await Movie.create({
             title: req.body.title,
@@ -102,5 +102,10 @@ router.delete("/:title", async(req, res, next) => {
         next(error)
     }
 })
+function isLoggedIn(req,res,next){
+    if (req.isAuthenticated() ) return next();
+    res.redirect('/auth/google');
+}
+
 
 module.exports = router

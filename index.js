@@ -10,6 +10,7 @@ const bodyParser = require('body-parser');
 const ejsLayouts = require('express-ejs-layouts');
 const app = express();
 require('./db/passport')
+
 // Middleware
 app.use(logger('dev')); // Logging middleware before other middlewares
 app.use(express.static(path.join(__dirname, 'public')));
@@ -40,10 +41,10 @@ app.set('views', path.join(__dirname, 'views'));
 // Routes
 const movieRouter = require("./controllers/moviecontroller");
 const userRouter = require("./controllers/usercontroller");
-
+const indexRouter = require("./controllers/indexcontroller");
 app.use('/movies', movieRouter);
 app.use('/users', userRouter);
-
+app.use('/', indexRouter);
 // Serve static files - This should be placed before defining your routes.
 app.use(express.static(__dirname + '/views'));
 

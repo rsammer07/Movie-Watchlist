@@ -1,7 +1,9 @@
 const mongoose = require(`../db/connection`)
 
 const factSchema = new mongoose.Schema({
-    text: String
+    text: String,
+    unwatchedMovies: [],
+    watchedMovies: []
   }, {
     timestamps: true
   });

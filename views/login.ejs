@@ -15,14 +15,16 @@
 <div id="registerdivbox">
     <button id="registerlinkbutton"><a id="registerlink" href="/createaccount">No Account? <br> Create One Here!</a></button>
 </div> -->
-<!-- <ul class="right">
-	<li>
-	<% if (user) { %>
-		<a href="/logout"><i class="material-icons left">trending_flat</i>Log Out</a>
-	<% } else { %> -->
-		<button><a href="/auth/google"><i class="material-icons left">vpn_key</i>Login with Google</a></button>
-	<!-- <% } %>
-	</li> -->
-<!-- </ul> -->
+<ul class="right">
+    <li>
+      <% if (user) { %>
+        <a href="/logout">Log Out</a>
+        <span>Hi <%= user.name %> </span>
+      <% } else { %>
+        <a href="/auth/google"> Login with Google</a>
+
+      <% } %>  
+    </li>
+  </ul>
 </body>
 </html>

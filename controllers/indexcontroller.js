@@ -1,9 +1,30 @@
-// const moviesRouter = require("./moviecontroller")
-// const userRouter = require("./usercontroller")
+const router = require('express').Router();
+const passport = require('passport');
 
-// function displayAllMovies(req, res){
-//     const movies = Movie.find({})
-//     res.render("homepage", { movies })
-// }
+// The root route renders our only view
+router.get('/', function(req, res) {
+  res.redirect('/profile');
+});
 
-// module.exports = { displayAllMovies }
+router.get('/auth/google', passport.authenticate(
+  'google',
+  { scope: ['profile', 'email'] }
+));
+
+// Google OAuth callback route
+router.get('/oauth2callback', passport.authenticate(
+  'google',
+  {
+    successRedirect : '/',
+    failureRedirect : '/login'
+  }
+));
+
+// OAuth logout route
+router.get('/logout', function(req, res){
+  req.logout();
+  res.redirect('/');
+});
+
+
+module.exports = router;
