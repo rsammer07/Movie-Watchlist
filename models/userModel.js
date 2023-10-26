@@ -1,12 +1,20 @@
 const mongoose = require(`../db/connection`)
 
+const factSchema = new mongoose.Schema({
+    text: String
+  }, {
+    timestamps: true
+  });
 const UserSchema = new mongoose.Schema({
-    userName: { type: String, required: true, unique: true },
-    email: { type: String, required: true, unique: true },
-    password: { type: String, required: true },
-    unwatchedMovies: [],
-    watchedMovies: []
-});
+    name: String,
+    email: String,
+    cohort: String,
+    avatar: String,
+    facts: [factSchema],
+    googleId: String
+  }, {
+    timestamps: true
+  });
 
 const User = mongoose.model("User", UserSchema)
 
