@@ -48,7 +48,7 @@ router.get("/update", async(req, res, next) => {
 
 
 //get movies by title "movie", { movie: movie[0] }
-router.get("/:id", async (req, res, next) => {
+router.get("/:title", async (req, res, next) => {
     try {
         console.log(req)
         const title = req.params.title;
