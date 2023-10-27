@@ -11,6 +11,7 @@ router.get('/auth/google', passport.authenticate(
   { scope: ['profile', 'email'] }
 ));
 
+
 // Google OAuth callback route
 router.get('/oauth2callback', passport.authenticate(
   'google',
