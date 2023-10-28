@@ -1,10 +1,17 @@
 <% if (movie) { %>
-    <h2><%= movie.title %></h2>
-    <img src="<%= movie.img %>" alt="<%= movie.title %> Poster" width="200">
-    <button id="add">Add to my list!</button>
-    <button id="watched">Watched?</button>
+    <div class="container">
+        <h2><%= movie.title %></h2>
+        <img src="<%= movie.img %>" alt="<%= movie.title %> Poster" width="200">
+        <% if (user) { %>
+            <div class="button-container">
+                <button onclick="add" class="add-button" data-movie-title="<%= movie.title %>">Add to my list!</button>
+            </div>
+        <% } %>
+    </div>
 <% } else { %>
     <p>Movie not found</p>
 <% } %>
+</div>
+
 </body>
 </html>

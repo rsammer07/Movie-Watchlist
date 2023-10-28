@@ -49,9 +49,7 @@ app.use('/', indexRouter);
 app.use(express.static(__dirname + '/views'));
 
 // Define your routes
-app.get('/', (req, res) => {
-  res.render('homepage.ejs');
-});
+
 
 app.get('/login', (req, res) => {
   res.render('login.ejs');
@@ -61,9 +59,6 @@ app.get('/profile', (req, res) => {
   res.render('profile.ejs');
 });
 
-app.get('/createaccount', (req, res) => {
-  res.render('createaccount.ejs');
-});
 
 app.get('/review', (req, res) => {
   res.render('review.ejs');

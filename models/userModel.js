@@ -1,18 +1,15 @@
 const mongoose = require(`../db/connection`)
 
-const factSchema = new mongoose.Schema({
-    text: String,
-    unwatchedMovies: [],
-    watchedMovies: []
-  }, {
-    timestamps: true
-  });
 const UserSchema = new mongoose.Schema({
     name: String,
     email: String,
-    cohort: String,
-    avatar: String,
-    facts: [factSchema],
+    unwatchedMovies: [{ 
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Movie"}],
+    // watchedMovies: [{
+    //   type: mongoose.Schema.Types.ObjectId,
+    //   ref: "Movie"
+    // }],
     googleId: String
   }, {
     timestamps: true

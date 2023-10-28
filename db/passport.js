@@ -1,5 +1,5 @@
 const passport = require('passport');
-const GoogleStrategy = require('passport-google-oauth').OAuth2Strategy;
+const GoogleStrategy = require('passport-google-oauth20').Strategy;
 const User = require('../models/userModel');
 
 passport.use(
@@ -9,12 +9,13 @@ passport.use(
       clientSecret: process.env.GOOGLE_SECRET,
       callbackURL: process.env.GOOGLE_CALLBACK,
     },
-    async (accessToken, refreshToken, profile, cb) => {
+    async (accessToken, refreshToken, profile, done) => {
       try {
         let user = await User.findOne({ googleId: profile.id });
 
         if (user) {
-          return cb(null, user);
+          // User already exists, so return it
+          return done(null, user);
         } else {
           // Create a new user via OAuth
           const newUser = new User({
@@ -23,11 +24,15 @@ passport.use(
             googleId: profile.id,
           });
 
+          // Save the new user to the database
           await newUser.save();
-          return cb(null, newUser);
+
+          const userID = req.body.user_id
+          // After saving, grab the user's ID and return it
+          return done(null, newUser);
         }
       } catch (err) {
-        return cb(err);
+        return done(err);
       }
     }
   )
@@ -47,3 +52,5 @@ passport.deserializeUser(async function (id, done) {
 });
 
 module.exports = passport;
+
+          

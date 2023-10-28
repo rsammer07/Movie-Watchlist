@@ -2,20 +2,25 @@
     <% movies.forEach(movie => { %>
         <div class="movie-card">
             <div class="movie-content">
-                <a href="/movies/<%= movie.title %>"> <!-- Wrap the image with an anchor tag -->
+                <a href="/movies/<%= movie.title %>">
                     <img src="<%= movie.img %>" alt="<%= movie.title %> Poster" width="200">
                 </a>
                 <h2 class="movie-title"><%= movie.title %></h2>
             </div>
-            <div class="button-container">
-                <button class="add-button">Add to my list!</button>
-                <button class="watched-button">Watched?</button>
-            </div>
+            <% if (user) { %>
+                <form method="PUT" action="/movies/add" class="add-movie-form">
+                    <input type="hidden" name="movieId" value="<%= movie._id %>">
+                    <div class="button-container">
+                        <button type="submit" class="add-button" data-movie-title="<%= movie.title %>">Add to my list!</button>
+                    </div>
+                </form>
+            <% } %>
         </div>
     <% }); %>
-    <div class="new-movie">
-        <h3>Don't see the movie you're looking for? Add it!</h3>
-        <button id="newMovie"><a id="newmovieLink" href="/movies/newMovie">ADD</a></button>
-    </div>
 </div>
-
+<div class="new-movie">
+    <h3>Don't see the movie you're looking for? Add it!</h3>
+    <a id="newmovieLink" href="/movies/newMovie"><button id="newMovie">ADD</button></a>
+</div>
+</body>
+</html>
