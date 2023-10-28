@@ -18,6 +18,7 @@ router.get("/", async (req, res, next) => {
             movies = await Movie.find()
         }
         // console.log(movies);
+        
         res.render("movies", { movies })
 
         // res.render("movies", { movies })
@@ -59,7 +60,16 @@ router.get("/:title", async (req, res, next) => {
     }
 });
 
-
+router.get("/add", async (req, res, next) => {
+    try {
+        // console.log(req)
+        const id = req.params.id;
+        const movie = await Movie.find({ id: id });
+        res.redirect("/profile")
+    } catch (error) {
+        next(error);
+    }
+});
 
 //post new movies
 router.post("/newMovie", async(req, res, next) => {

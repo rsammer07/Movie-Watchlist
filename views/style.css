@@ -8,8 +8,12 @@ button{
   border-radius: 10px;
   padding: 10px;
 }
+button:hover{
+  color: white;
+  background: linear-gradient(to right, #5F0F40, #310E68)
+}
 footer{
-  margin-top: 100%;
+  margin-top: 70px;
   font-size: 20px;
   text-align: center;
 }
@@ -81,6 +85,7 @@ font-size: 50px;
 }
 #homepagelinks {
   display: flex;
+  justify-content: center;
   gap: 25px;
 }
 #search-form { 
@@ -154,7 +159,7 @@ margin: auto;
 }
 
 #add-movie {
-text-align:center;
+margin: auto;
 }
 #logo {
   display: flex;
@@ -194,4 +199,26 @@ border: none;
 }
 #loginlink{
   text-decoration: none;
+}
+.button-container2{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.container{
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+#seeall{
+  font-size: 30px;
+  margin-top: 80px;
+}
+#please{
+  font-size: 30px;
+  text-align: center;
+  font-weight: bold;
+}
+#newmovie{
+  text-align: center;
 }
