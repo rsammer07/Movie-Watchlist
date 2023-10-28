@@ -4,7 +4,7 @@ const User = require("../models/userModel");
 const passport = require('../db/passport'); 
 
 function index(req, res, next) {
-  console.log(req.query)
+ 
   let modelQuery = req.query.name ? {name: new RegExp(req.query.name, 'i')} : {};
   let sortKey = req.query.sort || 'name';
   User.find(modelQuery)
@@ -73,33 +73,32 @@ router.get('/logout', function(req, res){
 
 router.patch("/", async (req, res, next) => {
   try {
-    // Check if the user is authenticated
     if (!req.isAuthenticated()) {
       return res.status(401).json({ error: 'Unauthorized' });
     }
 
-    // Get the authenticated user from the session
     const user = req.user;
+    
+    const movieId = req.body.movieId;
+   
 
-    // Find the movie by its ID (assuming you pass the movie ID in the query parameters)
-    const movieId = req.query.movieId; // Modify this to match your query parameter
     const movie = await Movie.findOne({ _id: movieId });
 
     if (!movie) {
       return res.status(404).json({ error: 'Movie not found' });
     }
 
-    // Update the user's list with the movie
-    user.unWatchedMovies.push(movie);
+    user.unWatchedMovies.push(movie._id);
     await user.save();
 
     res.status(200).json({ message: 'Movie added to the user\'s list' });
-    // res.redirect(`/profile`)
+    res.redirect(`/profile`)
   } catch (error) {
     console.error(error);
     res.status(500).json({ error: 'Internal Server Error' });
   }
 });
+
 
 
 

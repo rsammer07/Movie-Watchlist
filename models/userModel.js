@@ -15,6 +15,17 @@ const UserSchema = new mongoose.Schema({
     timestamps: true
   });
 
+//prehook
+UserSchema.pre("findOne", function(next){
+  this.populate("unwatchedMovies")
+  next()
+})
+
+UserSchema.pre("find", function(next){
+  this.populate("unwatchedMovies")
+  next()
+})
+
 const User = mongoose.model("User", UserSchema)
 
 module.exports = User

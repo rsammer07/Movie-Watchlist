@@ -11,7 +11,6 @@ router.get("/", async (req, res, next) => {
     try {
         let movies
         if(req.query.title){
-        console.log("hello");
         const title = req.query.title
             movies = await Movie.find({ title: {$regex: title, $options: 'i'}})
         } else{
@@ -51,10 +50,14 @@ router.get("/update", async(req, res, next) => {
 //get movies by title "movie", { movie: movie[0] }
 router.get("/:title", async (req, res, next) => {
     try {
-        console.log(req)
         const title = req.params.title;
         const movie = await Movie.findOne({ title: title });
-        res.render("example", { movie })
+        console.log(movie, "movie line 55")
+        if (movie) {
+            res.render("example", { movie });
+        } else {
+            res.render("example", { movie: null }); 
+        }
     } catch (error) {
         next(error);
     }
