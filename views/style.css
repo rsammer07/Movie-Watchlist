@@ -222,3 +222,13 @@ border: none;
 #newmovie{
   text-align: center;
 }
+#welcome{
+  text-align: center;
+}
+#listofmovies{
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: flex-start;
+  margin: 50px;
+}

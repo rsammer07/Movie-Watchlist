@@ -3,12 +3,13 @@
         <div class="movie-card">
             <div class="movie-content">
                 <a href="/movies/<%= movie.title %>">
-                    <img src="<%= movie.img %>" alt="<%= movie.title %> Poster" width="200">
+                    <img src="<%= movie.img %>" alt="<%= movie.title._id %> Poster" width="200">
                 </a>
                 <h2 class="movie-title"><%= movie.title %></h2>
             </div>
             <% if (user) { %>
-                <form method="PUT" action="/movies/add" class="add-movie-form">
+                <form method="POST" action="/user" class="add-movie-form">
+                    <input type="hidden" name="_method" value="PATCH">
                     <input type="hidden" name="movieId" value="<%= movie._id %>">
                     <div class="button-container">
                         <button type="submit" class="add-button" data-movie-title="<%= movie.title %>">Add to my list!</button>
