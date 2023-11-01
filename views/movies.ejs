@@ -1,27 +1,29 @@
-<div class="movies-grid">
+<div class='movies-grid'>
     <% movies.forEach(movie => { %>
-        <div class="movie-card">
-            <div class="movie-content">
-                <a href="/movies/<%= movie.title %>">
-                    <img src="<%= movie.img %>" alt="<%= movie.title._id %> Poster" width="200">
-                </a>
-                <h2 class="movie-title"><%= movie.title %></h2>
+        <div class='movie-card'>
+            <div class='movie-content'>
+                    <img src='<%= movie.img %>' alt='<%= movie.title._id %> Poster' width='200'>
+                <h2 class='movie-title'><%= movie.title %></h2>
             </div>
             <% if (user) { %>
-                <form method="POST" action="/user" class="add-movie-form">
-                    <input type="hidden" name="_method" value="PATCH">
-                    <input type="hidden" name="movieId" value="<%= movie._id %>">
-                    <div class="button-container">
-                        <button type="submit" class="add-button" data-movie-title="<%= movie.title %>">Add to my list!</button>
+                <form  action='/users?_method=PUT' method='POST' class='add-movie-form'>
+                    <input type='hidden' name='movieId' value='<%= movie.id %>'>
+
+                    <div class='button-container'>
+                        <% if (userMovies.includes(movie.id)) { %>
+                            <input disabled type='button' class='add-button' value='Added'/>
+                        <% } else { %> 
+                            <input type='submit' class='add-button' value='Add To My List'/>
+                        <% } %>
                     </div>
                 </form>
             <% } %>
         </div>
     <% }); %>
 </div>
-<div class="new-movie">
+<div class='new-movie'>
     <h3>Don't see the movie you're looking for? Add it!</h3>
-    <a id="newmovieLink" href="/movies/newMovie"><button id="newMovie">ADD</button></a>
+    <a id='newmovieLink' href='/movies/newMovie'><button id='newMovie'>ADD</button></a>
 </div>
 </body>
 </html>

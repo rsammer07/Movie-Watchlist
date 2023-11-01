@@ -1,29 +1,30 @@
 <div id="homepagelinks">
-    <a href="/movies"><button id="seeall">Click here to see All Movies!!</button></a>
+  <a href="/movies"><button id="seeall">Click here to see All Movies!!</button></a>
 </div>
 <% if (user) { %>
-    <h1 id="welcome">Welcome <%= user.name %></h1>
-    <div id="Listofmovies">
-        <h2>Unwatched Movies</h2>
-        <% user.unwatchedMovies.forEach(movie => { %>
-        <div class="movie-content">
-            <img src="<%= movie.img %>" alt="<%= movie.title %> Poster" width="200">
-            <h2 class="movie-title"><%= movie.title %></h2>
-            <div class="button-container">
+  <h1 id="welcome">Welcome <%= user.name %></h1>
+  <div id="Listofmovies">
+          <h2>Unwatched Movies</h2>
+          <% user.unwatchedMovies.forEach(movie => { %>
+            <div class="movie-content">
+                  <img src="<%= movie.img %>" alt="<%= movie.title %> Poster" width="200">
+                  <h2 class="movie-title"><%= movie.title %></h2>
+                  <form action="/users/remove-movie?_method=PUT" method="POST">
+                    <input type="hidden" name="movieId" value="<%= movie._id %>">
+                    <button type="submit" class="remove-button">Remove from List</button>
+                  </form>
             </div>
-        </div>
-    </div>
-    <% }); %>
+  <% }); %>
 <% } else { %>
-    <p id="please">Please sign in to add movies to your list!</p>
-    <h1 id="homepage-intro">Welcome to our Movie Watchlist application! 
-        <br>
-        We designed this application to allow users to add movies they enjoy to their watched lists and give them reviews!
-        <br>
-        We also designed it for users to add movies not included in the list and movies they want to watch to their to-watch list!
-        <br>
-        Hope you guys enjoy! 
-    </h1>
+  <p id="please">Please sign in to add movies to your list!</p>
+  <h1 id="homepage-intro">Welcome to our Movie Watchlist application! 
+      <br>
+      We designed this application to allow users to add movies they enjoy to their watched lists and give them reviews!
+      <br>
+      We also designed it for users to add movies not included in the list and movies they want to watch to their to-watch list!
+      <br>
+      Hope you guys enjoy! 
+  </h1>
 <% } %>
 
 </html>
